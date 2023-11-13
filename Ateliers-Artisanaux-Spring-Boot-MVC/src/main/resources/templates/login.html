@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/cancelReservation.css}" />
+    <title>Annuler une réservation</title>
+</head>
+<body>
+	<div class="card-container">
+        <div class="back-button">
+            <label for="emailInput">S'identifier</label>
+            <form id="searchForm" th:action="@{/reservations/participant}" method="get">
+                <input type="text" id="emailInput" name="email" th:value="${email}" placeholder="Entrez l'e-mail du participant">
+                <button type="submit">Chercher</button>
+            </form>
+        </div>
+</div>
+    <div class="center">
+        <a href="/" class="back-button-principal">Retour au Menu Principal</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!--(reservationsByParticipant.html) -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Réservations par Participant</title>
+    <link rel="stylesheet" type="text/css"th:href="@{/css/reservationsByParticipants.css}" />
+        <!-- Include jQuery and jQuery UI from WebJars -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <!-- Datepicker styles -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+    <link rel="stylesheet" type="text/css"th:href="@{/css/showReservationForm.css}" />
+</head>
+<body>
+	<div class="conteneur">
+        <div class="conteneur-gauche">
+            <!-- Contenu du conteneur de gauche -->
+            <div class="card">
+    <h1 th:text="${participant.nomParticipant}"></h1>
+    <p th:text="${participant.emailParticipant}"></p>
+    <p th:text="ID + ${participant.idParticipant}"></p>
+    <!-- Ajoutez d'autres informations si nécessaire -->
+</div>
+<h3 style="text-align:center; margin: 40px">Vos réservations</h3>
+<div class="reservation-card" th:each="reservation : ${reservations}">
+    <p>
+        Date de début : <span th:text="${reservation.dateDebut}"></span><br>
+        Atelier : <span th:text="${reservation.atelier.nomAtelier}"></span><br>
+        ID de réservation: <span th:text="${reservation.idReservation}"></span><br>
+        <!-- Ajoutez d'autres informations que vous souhaitez afficher -->
+          <!-- Add a cancellation button for each reservation -->
+<form th:action="@{/reservations/delete}" method="post" th:object="${reservation}" id="deleteForm">
+    <input type="hidden" th:name="reservationId" th:value="${reservation.idReservation}" />
+    <button type="button" onclick="deleteAction()" class="back-button">Annuler la réservation</button>
+</form>
+    
+    <!--javascript pour delete avec l'id de reservation --> 
+<script th:inline="javascript">
+    function deleteAction() {
+        var form = document.getElementById('deleteForm');
+        form.action = /*[[@{/reservations/delete(id=${reservation.idReservation})}]]*/ '';
+        form.submit();
+    }
+</script>
+    </p>
+</div>
+        </div>
+        <div class="conteneur-droite">
+            <!-- Contenu du conteneur de droite -->
+               <div class="link-container">
+<li>
+</li>
+       
+        <div class="form-card">
+        <form action="/makeReservation" method="post">
+		<h3> Réserver un créneau :</h3>	
+        <label for="atelier">Choisir un atelier :</label>
+        <select id="atelier" name="atelier">
+			 <option value="" disabled selected>Choisissez un atelier</option>
+            <!-- Utilisation de Thymeleaf pour itérer sur la liste des ateliers -->
+			<option th:each="atelier : ${ateliers}" th:value="${atelier.idAtelier}" th:text="${atelier.nomAtelier}"></option>
+        </select>
+        <br>
+        <label for="date">Choisir date :</label>
+        <input type="text" id="date" name="dateDebut" readonly>
+        <!-- Utilisez un champ de texte en lecture seule pour afficher la date sélectionnée -->
+        <br>
+        <!-- input caché du participant >-->
+		<input name="participant" type="hidden" th:value="${participant.idParticipant}" />
+
+        <label for="horaire">Choisir horaire :</label>
+        <select id="horaire" name="creneauHoraire">
+        <option th:each="creneauHoraire : ${creneauxHoraire}" th:value="${creneauHoraire.idCreneau}" th:text="${creneauHoraire.nomCreneau}"></option>
+
+        </select>
+        <br>
+
+        <input type="submit" value="Soumettre" class="back-button-principal">
+    </form>
+    
+    	<li><a href="/" class="back-button">Retour au Menu Principal</a></li>
+    </div>
+     </div>
+         </div>
+
+    <!-- Message de confirmation (configuré dans le controleur) -->
+    <div th:if="${confirmationMessage}" class="confirmation-message">
+        <p th:text="${confirmationMessage}"></p>
+    </div>
+</div>
+        </div>
+        
+        
+     <!-- Javascript -->   
+        
+    <script>
+		$(document).ready(function () {
+    console.log("jQuery est-il défini ?", typeof jQuery !== "undefined");
+
+    // Activate the datepicker on the specified input field
+    $("#date").datepicker({
+        beforeShowDay: function (date) {
+            // Désactive tous les samedis et dimanches
+            var day = date.getDay();
+            return [day !== 0 && day !== 6, ''];
+        }
+    });
+});
+    </script>
+
+
+
+ 
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulaire d'inscription</title>
+    <!-- Include jQuery and jQuery UI from WebJars -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <!-- Datepicker styles -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+    <link rel="stylesheet" type="text/css"th:href="@{/css/showReservationForm.css}" />
+
+</head>
+<body>
+	 <h2>Formulaire d'inscription à un atelier</h2>
+    
+ 
+    <!-- Message de confirmation (configuré dans le controleur) -->
+    <div th:if="${confirmationMessage}" class="confirmation-message">
+        <p th:text="${confirmationMessage}"></p>
+    </div>
+</div>
+    <div class="center">
+        <a href="/" class="back-button-principal">Retour au Menu Principal</a>
+    </div>
+    
+    <script>
+		$(document).ready(function () {
+    console.log("jQuery est-il défini ?", typeof jQuery !== "undefined");
+
+    // Activate the datepicker on the specified input field
+    $("#date").datepicker({
+        beforeShowDay: function (date) {
+            // Désactive tous les samedis et dimanches
+            var day = date.getDay();
+            return [day !== 0 && day !== 6, ''];
+        }
+    });
+});
+    </script>
+</body>
+</html>

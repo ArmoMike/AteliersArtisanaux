@@ -1,0 +1,44 @@
+@charset "ISO-8859-1";
+
+body {
+    height: 100vh;
+    margin: 0; /* Remove default body margin */
+    display: flex;
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+}
+
+.back-button {
+    height: 2.5vh;
+    width: 14vw;
+    display: flex;
+    margin: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    background-color: rgb(0, 0, 0);
+    color: #fff;
+    border-radius: 100px;
+    transition: background-color 0.3s;
+    place-content: center;
+}
+
+.back-button:hover {
+    background-color: rgb(0, 0, 0);
+}
+
+.back-button button {
+    border: none;
+    background-color: rgb(0, 0, 0);
+    color: white;
+}
+
+ul {
+    list-style: none;
+}
+
+h1 {
+    color: rgb(0, 0, 0);
+}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	    <link rel="stylesheet" type="text/css"th:href="@{/css/reservations.css}" />
+
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des Réservations</title>
+</head>
+<body>
+    <h2>Liste des Réservations</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Date de Début</th>
+                <th>Atelier</th>
+                <th>Créneau</th>
+                <th>Participant</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="reservation : ${reservations}">
+                <td th:text="${reservation.idReservation}"></td>
+                <td th:text="${reservation.dateDebut}"></td>
+                <td th:text="${reservation.atelier.nomAtelier}"></td> <!-- Ternaire pour afficher l'horaire en fonction de l'id de créneau-->
+				<td th:text="${reservation.creneauHoraire.nomCreneau}"></td>
+                <td th:text="${reservation.participant.nomParticipant}"></td>
+
+                
+            </tr>
+        </tbody>
+    </table>
+    <div class="center">
+    <a href="/" class="back-button">Retour au Menu Principal</a>
+    </div>
+
+</body>
+</html>

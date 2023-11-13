@@ -1,0 +1,54 @@
+@charset "ISO-8859-1";
+
+body {
+    height: 100vh;
+
+}
+h2 {
+	text-align: center;
+}
+.back-button-principal {
+    grid-area: button;
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    background-color: rgb(0, 0, 0);
+    color: #fff;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+.form-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 10vh auto;
+    line-height: 1.5;
+    width: 30rem;
+}
+
+/* Ajustement pour les étiquettes */
+.form-card label {
+    margin-bottom: 8px;
+}
+
+/* Ajustement pour les champs de saisie */
+.form-card select,
+.form-card input {
+    width: 100%;
+    padding: 5px; /* Ajuster la marge intérieure selon vos préférences */
+    margin-bottom: 12px;
+    box-sizing: border-box; /* Pour inclure la bordure et le remplissage dans la largeur totale */
+}
+
+/* Ajustement pour le bouton Soumettre */
+.form-card input[type="submit"] {
+    width: auto; /* Pour utiliser la largeur par défaut du bouton */
+}
